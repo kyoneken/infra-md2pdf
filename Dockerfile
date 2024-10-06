@@ -1,13 +1,15 @@
 FROM alpine:3.20
 
-# 必要なパッケージのインストール
-RUN apk add --no-cache \
+# システムのアップデートと必要なパッケージのインストール
+RUN apk update && apk upgrade && \
+    apk add --no-cache \
     multimarkdown \
     chromium \
     nodejs \
     npm \
     fontconfig \
-    ttf-freefont
+    ttf-liberation \
+    && rm -rf /var/cache/apk/*
 
 # Playwrightのインストール
 RUN npm init -y && \

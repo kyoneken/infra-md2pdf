@@ -40,6 +40,9 @@ jobs:
           echo "IS_BETA=false" >> $GITHUB_OUTPUT
         fi
 
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
       with:
@@ -48,3 +51,10 @@ jobs:
         tags: |
           ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
           ${{ steps.check_beta.outputs.IS_BETA == 'false' && format('{0}/{1}:latest', env.REGISTRY, env.IMAGE_NAME) || '' }}
+        outputs: type=docker,dest=/tmp/docker-image.tar
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: docker-image
+        path: /tmp/docker-image.tar
