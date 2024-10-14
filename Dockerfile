@@ -1,4 +1,4 @@
-FROM alpine:3.20
+FROM alpine:3.19
 
 # システムのアップデートと必要なパッケージのインストール
 RUN apk update && apk upgrade && \
