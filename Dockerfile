@@ -35,7 +35,7 @@ RUN npm init -y && \
     npx playwright install chromium --with-deps
 
 # スクリプトのコピー
-COPY convert_to_pdf.js .
+COPY . .
 
 # シェルをデフォルトのコマンドとして設定
 CMD ["/bin/bash"]
