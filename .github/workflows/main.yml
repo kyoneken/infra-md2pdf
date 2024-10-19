@@ -6,7 +6,7 @@ on:
       - 'v[0-9]+.[0-9]+.[0-9]+*'  # セマンティックバージョニングタグにマッチ（ベータバージョンも含む）
 
 env:
-  REGISTRY: ghcr.ioca
+  REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
