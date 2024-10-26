@@ -29,16 +29,10 @@ RUN git clone https://github.com/fletcher/MultiMarkdown-6.git && \
 # 作業ディレクトリの設定
 WORKDIR /app
 
-# Playwrightの環境変数設定
-ENV PLAYWRIGHT_BROWSERS_PATH=/github/home/.cache/ms-playwright
-
-# Playwrightのインストールとブラウザのセットアップ
-RUN mkdir -p /github/home/.cache/ms-playwright && \
-    npm init -y && \
-    npm install playwright && \
-    npx playwright install chromium --with-deps && \
-    # ディレクトリの権限を調整
-    chmod -R 777 /github/home/.cache/ms-playwright
+# Playwrightのインストールと設定（Chromeを含む）
+RUN npm init -y && \
+    npm install playwright@latest && \
+    npx playwright install chromium --with-deps
 
 # スクリプトのコピー
 COPY . .
