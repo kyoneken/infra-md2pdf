@@ -32,7 +32,7 @@ WORKDIR /app
 # Playwrightのインストールと設定（Chromeを含む）
 RUN npm init -y && \
     npm install playwright@latest && \
-    npx playwright install chromium --with-deps
+    npx playwright install --with-deps
 
 # スクリプトのコピー
 COPY . .
