@@ -32,7 +32,8 @@ RUN groupadd -g 1100 nonroot && \
 
     # アプリケーションディレクトリの作成と権限設定
 RUN mkdir -p /app && \
-    chown -R nonroot:nonroot /app
+    chown -R nonroot:nonroot /app && \
+    chmod -R 777 /app
 
 # Playwrightのグローバルインストールディレクトリを作成し、権限を設定
 RUN mkdir -p /home/nonroot/.cache/ms-playwright && \
@@ -48,7 +49,7 @@ WORKDIR /app
 RUN npm init -y && \
     npm install playwright@latest && \
     PLAYWRIGHT_BROWSERS_PATH=/usr/local/share/.cache/ms-playwright \
-    npx playwright install --with-deps && \
+    npx playwright install --with-deps chromium && \
     chown -R nonroot:nonroot /app /home/nonroot/.cache /home/nonroot/.npm /usr/local/share/.cache/ms-playwright
 
 # 環境変数の設定
