@@ -3,7 +3,10 @@ const fs = require('fs').promises;
 const path = require('path');
 
 async function convertToPdf(files, outputDir) {
-  const browser = await chromium.launch();
+  const browser = await chromium.launch({
+    channel: 'chrome',
+    executablePath: process.env.CHROME_PATH || '/usr/bin/google-chrome'
+  });
 
   try {
     for (const file of files) {
