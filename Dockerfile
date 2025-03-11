@@ -6,6 +6,10 @@ RUN apt-get update && apt-get install -y \
     npm \
     fontconfig \
     fonts-liberation \
+    # 日本語フォントを追加
+    fonts-noto-cjk \
+    fonts-ipafont \
+    locales \
     ca-certificates \
     git \
     build-essential \
