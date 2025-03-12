@@ -6,6 +6,10 @@ RUN apt-get update && apt-get install -y \
     npm \
     fontconfig \
     fonts-liberation \
+    # 日本語フォントを追加
+    fonts-noto-cjk \
+    fonts-ipafont \
+    locales \
     ca-certificates \
     git \
     build-essential \
@@ -13,6 +17,14 @@ RUN apt-get update && apt-get install -y \
     wget \
     gnupg \
     && rm -rf /var/lib/apt/lists/*
+
+# ロケールの設定
+RUN locale-gen ja_JP.UTF-8
+ENV LANG ja_JP.UTF-8
+ENV LC_ALL ja_JP.UTF-8
+
+# フォントキャッシュの更新
+RUN fc-cache -fv
 
 # Google Chromeリポジトリの追加とインストール
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
